@@ -287,9 +287,7 @@ DECLARE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, singleton)
 
 #define DECLARE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, accessorMethodName)\
 + (classname *)accessorMethodName;\
-+ (void)setup;\
-+ (void)destroy;\
-+ (BOOL)hasBeenCreated;
++ (BOOL)hasBeenSetUp;
 
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(classname)\
