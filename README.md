@@ -175,7 +175,7 @@ Properties and local variables should be camel-case with the leading word being 
 **For example:**
 
 ```objc
-@interface AntfarmController: NSObject
+@interface AntfarmController : NSObject
 
 @property (nonatomic, copy) NSString *queenAnt;
 
@@ -276,21 +276,69 @@ All categories should be three-letter prefixed, and all methods and properties (
 
 ### Singletons
 
-Singleton objects should use a thread-safe pattern for creating their shared instance.
+Singleton objects should use a thread-safe pattern for creating their shared instance. At Clinkle we use a header file that defines macros, so that declaring a singleton as such takes just one line!
+
 ```objc
-+ (instancetype)sharedInstance
-{
-   static id sharedInstance = nil;
+#ifndef Clinkle_Singleton_h
+#define Clinkle_Singleton_h
 
-   static dispatch_once_t onceToken;
-   dispatch_once(&onceToken, ^{
-      sharedInstance = [[self alloc] init];
-   });
+#define DECLARE_SINGLETON_FOR_CLASS(classname)\
+DECLARE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, singleton)
 
-   return sharedInstance;
+#define DECLARE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, accessorMethodName)\
++ (classname *)accessorMethodName;\
++ (void)setup;\
++ (void)destroy;\
++ (BOOL)hasBeenCreated;
+
+
+#define SYNTHESIZE_SINGLETON_FOR_CLASS(classname)\
+SYNTHESIZE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, singleton)
+
+#define SYNTHESIZE_SINGLETON_FOR_CLASS_WITH_ACCESSOR(classname, accessorMethodName)\
+static classname *classname##accessorMethodName = nil;\
+\
++ (classname *)accessorMethodName\
+{\
+    if (!classname##accessorMethodName) {\
+        @synchronized(self) {\
+            classname##accessorMethodName = [super allocWithZone:NULL];\
+            classname##accessorMethodName = [classname##accessorMethodName init];\
+        }\
+    }\
+    return classname##accessorMethodName;\
+}\
+\
++ (void)setup\
+{\
+    [self accessorMethodName];\
+}\
+\
++ (BOOL)hasBeenSetUp\
+{\
+    return classname##accessorMethodName != nil;\
 }
+
+#endif
 ```
-This will prevent [possible and sometimes prolific crashes](http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
+
+Now declaring an object as a singleton is one line in the header:
+```objc
+@interface Accounts : NSObject
+
+DECLARE_SINGLETON_FOR_CLASS(Accounts);
+
+@end
+```
+
+And one line in the implementation:
+```objc
+@implementation Accounts
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(Accounts);
+
+@end
+```
 
 ## Constants
 
