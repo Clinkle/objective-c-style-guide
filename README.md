@@ -49,30 +49,36 @@ view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
-## Spacing
+## Spacing and newlines
+
+We believe vertical whitespace is your friend. It majorly improves code readability.  Therefore:
 
 * Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* All control flow braces (`if`/`else`/`switch`/`while`/`typedef` etc.) and method braces always open on a newline and close on another newline.
 
 **For example:**
 ```objc
-if (user.isHappy) {
+if (user.isHappy)
+{
     // Do something
 }
-else {
+else
+{
     // Do something else
 }
 ```
+
 * There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
-* `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+* `@synthesize` and `@dynamic` should each be declared on their own new lines in the implementation.
 
 ## Control Flow
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line “inside” the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line “inside” the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
 
 **For example:**
 ```objc
-if (!error) {
+if (!error)
+{
     return success;
 }
 ```
@@ -112,7 +118,8 @@ When methods return an error parameter by reference, switch on the returned valu
 **For example:**
 ```objc
 NSError *error;
-if (![self trySomethingWithError:&error]) {
+if (![self trySomethingWithError:&error])
+{
     // Handle Error
 }
 ```
@@ -121,7 +128,8 @@ if (![self trySomethingWithError:&error]) {
 ```objc
 NSError *error;
 [self trySomethingWithError:&error];
-if (error) {
+if (error)
+{
     // Handle Error
 }
 ```
@@ -177,7 +185,8 @@ Properties and local variables should be camel-case with the leading word being 
 **Not:**
 
 ```objc
-@interface AntfarmController : NSObject {
+@interface AntfarmController : NSObject
+{
     NSString *queenAnt;
 }
 ```
@@ -253,9 +262,11 @@ All categories should be three-letter prefixed, and all methods and properties (
 `init` methods should be structured like this:
 
 ```objc
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init]; // or call the designated initalizer
-    if (self) {
+    if (self)
+    {
         // Custom initialization
     }
 
@@ -267,7 +278,8 @@ All categories should be three-letter prefixed, and all methods and properties (
 
 Singleton objects should use a thread-safe pattern for creating their shared instance.
 ```objc
-+ (instancetype)sharedInstance {
++ (instancetype)sharedInstance
+{
    static id sharedInstance = nil;
 
    static dispatch_once_t onceToken;
@@ -366,14 +378,23 @@ Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Neve
 
 This allows for more consistency across files and greater visual clarity.
 
+For more complex boolean operators (combinations of `||` and `&&`), each individual operation has its own line within the `if` braces.
+
 **For example:**
 
 ```objc
-if (!someObject) {
+if (!someObject)
+{
     
-} else if (usersTShirtIsFunny) {
+} 
+else if (usersTShirtIsFunny
+         || (userHasSeenBeardedWoman &&
+             beardedWomanDidWinBlueRibbon))
+{
     
-} else if (![userIsPlayingBadminton boolValue]) {
+} 
+else if (![userIsPlayingBadminton boolValue])
+{
     
 }
 
@@ -382,11 +403,16 @@ if (!someObject) {
 **Not:**
 
 ```objc
-if (someObject == nil) {
+if (someObject == nil)
+{
 
-} else if (usersTShirtIsFunny == YES) { // Never do this.
+}
+else if (usersTShirtIsFunny == YES || (userHasSeenBeardedWoman && beardedWomanDidWinBlueRibbon)) // Never do this.
+{
     
-} else if ([userIsPlayingBadminton boolValue] == NO) { // why u no use your brain?
+}
+else if ([userIsPlayingBadminton boolValue] == NO) // why u no use your brain?
+{
     
 }
 ```
