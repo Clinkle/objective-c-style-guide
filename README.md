@@ -389,7 +389,7 @@ if (someObject == nil) {
 }
 ```
 
-If the name of a `BOOL` property is expressed as an adjective, the property can omit the “is” prefix, but should specify the conventional name for the getter. For example:
+If the name of a `BOOL` property is expressed as an adjective, the property can omit the `is` prefix, but should specify the `is`-prefixed name for the getter. For example:
 
 ```objc
 @property (nonatomic, assign, getter=isEditable) BOOL editable;
