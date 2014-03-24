@@ -13,19 +13,19 @@ We take no credit for the inspiration behind the meat of the guide. That goes to
   * [Error handling](#error-handling)
 * [Methods](#methods)
 * [Variables](#variables)
-  * [Properties vs. instance variables](#Properties-vs-instance-variables)
+  * [Properties vs. instance variables](#properties-vs-instance-variables)
   * [Private Properties](#private-properties)
 * [Naming](#naming)
+  * [Images](#images)
   * [CocoaPods and Open-Source](#cocoapods-and-open-source)
   * [Categories](#categories)
-  * [Images](#images)
 * [Object Lifecycle](#object-lifecycle)
   * [init and dealloc](#init-and-dealloc)
   * [Singletons](#singletons)
 * [Constants](#constants)
 * [Literals](#literals)
-* [Comments](#comments)
 * [Enumerated Types](#enumerated-types)
+* [Comments](#comments)
 * [Booleans](#booleans)
 * [Xcode project](#xcode-project)
 
@@ -160,14 +160,14 @@ static const NSString *kMothersMaidenName = @"TapatÃ­o";
 
 Property definitions should be used in place of naked instance variables, exclusively. Accessing properties by their generated underscore-prefixed instance variable should be avoided except in custom setters and getters.
 
-Properties and local variables should be camel-case with the leading word being lowercase. 
+Properties and local variables should be camel-case with the leading word being lowercase. The property attribute `nonatomic` always precedes memory-management attributes like `strong` or `copy`. Property attributes should always be explicitly stated, never implied
 
 **For example:**
 
 ```objc
 @interface AntfarmController: NSObject
 
-@property (nonatomic) NSString *queenAnt;
+@property (nonatomic, copy) NSString *queenAnt;
 
 @end
 ```
@@ -300,12 +300,6 @@ static const NSInteger kCLKFrogAppendageLengthRatio = 4.7;
 #define FROG_LEG_LENGTH 4.7
 ```
 
-## Comments
-
-When they are needed, comments should be used to explain **why** a particular piece of code does something. Any comments that are used must be kept up-to-date or deleted.
-
-Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
-
 ## Literals
 
 `NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
@@ -358,6 +352,12 @@ typedef enum AccountType
 } AccountType;
 ```
 
+## Comments
+
+When they are needed, comments should be used to explain **why** a particular piece of code does something. Any comments that are used must be kept up-to-date or deleted.
+
+Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
+
 ## Booleans
 
 Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Never compare something directly to `YES`, because `YES` is defined to 1 and a `BOOL` can be up to 8 bits.
@@ -368,38 +368,31 @@ This allows for more consistency across files and greater visual clarity.
 
 ```objc
 if (!someObject) {
+    
+} else if (usersTShirtIsFunny) {
+    
+} else if (![userIsPlayingBadminton boolValue]) {
+    
 }
+
 ```
 
 **Not:**
 
 ```objc
 if (someObject == nil) {
+
+} else if (usersTShirtIsFunny == YES) { // Never do this.
+    
+} else if ([userIsPlayingBadminton boolValue] == NO) { // why u no use your brain?
+    
 }
 ```
 
------
-
-**For a `BOOL`, here are two examples:**
+If the name of a `BOOL` property is expressed as an adjective, the property can omit the “is” prefix, but should specify the conventional name for the getter. For example:
 
 ```objc
-if (isAwesome)
-if (![someObject boolValue])
-```
-
-**Not:**
-
-```objc
-if ([someObject boolValue] == NO)
-if (isAwesome == YES) // Never do this.
-```
-
------
-
-If the name of a `BOOL` property is expressed as an adjective, the property can omit the “is” prefix but specifies the conventional name for the get accessor, for example:
-
-```objc
-@property (assign, getter=isEditable) BOOL editable;
+@property (nonatomic, assign, getter=isEditable) BOOL editable;
 ```
 
 Text and example taken from the [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE).
