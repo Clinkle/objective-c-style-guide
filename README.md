@@ -1,8 +1,8 @@
 # Clinkle Objective-C Style Guide
 
-At Clinkle, when our C purists friends or our LISP Purist friends say "Objective-C looks like documentation, not code," we say "That's a feature, not a bug"
+At Clinkle, when our C purists friends or our LISP Purist friends say “Objective-C looks like documentation, not code,” we say “That’s a feature, not a bug!”
 
-We take no credit for the inspiration behind the meat of the guide. That goes to the team at the [NYTimes](https://github.com/NYTimes/objective-c-style-guide).  We hope you agree with some of the modifcations we've made for our own purposes.  We belive the best mark of a good codebase is one where you don't know which engineer wrote a particular file (until you use `git blame`, if you must).
+We take no credit for the inspiration behind the meat of the guide. That goes to the team at [The New York Times](https://github.com/NYTimes/objective-c-style-guide).  We hope you agree with some of the modifcations we’ve made for our own purposes.  We belive the best mark of a good codebase is one where you don’t know which engineer wrote a particular file (until you use `git blame`, if you must).
 
 ## Table of Contents
 
@@ -66,7 +66,7 @@ else {
 
 ## Control Flow
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line “inside” the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
 
 **For example:**
 ```objc
@@ -142,7 +142,7 @@ Variables should be named as descriptively as possible. Single letter variable n
 
 Asterisks indicating pointers belong with the variable, e.g., `NSString *text` not `NSString* text` or `NSString * text`.
 
-[Ownership-qualifying compiler directives](http://clang.llvm.org/docs/AutomaticReferenceCounting.html#ownership-qualification) like `__weak` put the directive before the normal type declaration.  This is not consistent with Apple's guidelines, but we find it makes refactoring or searching with regexes more consistent.
+[Ownership-qualifying compiler directives](http://clang.llvm.org/docs/AutomaticReferenceCounting.html#ownership-qualification) like `__weak` put the directive before the normal type declaration.  This is not consistent with Apple’s guidelines, but we find it makes refactoring or searching with regexes more consistent.
 
 ```objc
 __weak typeof(self) weakSelf = self;
@@ -229,7 +229,7 @@ Images that are used for a similar purpose should be grouped in respective group
 
 ### CocoaPods and Open-Source
 
-A three-letter prefix (e.g. `CLK`) should be used for any code in the codebase that has the potential to be open-sourced.  It's *not* necessary to use the prefix for standard application-specific classes.  Utilities classes or other code that could easily and cleanly be pulled out of the codebase and used independently on other projects should use the prefix.  The rule of thumb is "Would we ever want to open-source this class in the future?"  If so, then three-letter-prefix the class.  If there are a number of related similar classes that themselves belong in a logical unit, break them out into their own local [CocoaPod](http://cocoapods.org/).
+A three-letter prefix (e.g. `CLK`) should be used for any code in the codebase that has the potential to be open-sourced.  It’s *not* necessary to use the prefix for standard application-specific classes.  Utilities classes or other code that could easily and cleanly be pulled out of the codebase and used independently on other projects should use the prefix.  The rule of thumb is “Would we ever want to open-source this class in the future?”  If so, then three-letter-prefix the class.  If there are a number of related similar classes that themselves belong in a logical unit, break them out into their own local [CocoaPod](http://cocoapods.org/).
 
 ### Categories
 
@@ -401,11 +401,11 @@ Text and example taken from the [Cocoa Naming Guidelines](https://developer.appl
 
 The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
 
-When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
+When possible, always turn on “Treat Warnings as Errors” in the target’s Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang’s pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
 
 # Other Objective-C Style Guides
 
-If ours doesn't fit your tastes, have a look at some other style guides:
+If ours doesn’t fit your tastes, have a look at some other style guides:
 
 * [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
 * [GitHub](https://github.com/github/objective-c-conventions)
