@@ -2,7 +2,9 @@
 
 At Clinkle, when our C purists friends or our LISP Purist friends say “Objective-C looks like documentation, not code,” we say “That’s a feature, not a bug!”
 
-We take no credit for the inspiration behind the meat of the guide. That goes to the team at [The New York Times](https://github.com/NYTimes/objective-c-style-guide).  We hope you agree with some of the modifcations we’ve made for our own purposes.  We belive the best mark of a good codebase is one where you don’t know which engineer wrote a particular file (until you use `git blame`, if you must).
+We belive you know you’ve discovered a good codebase when that you can’t tell which engineer wrote a particular file (until you use `git blame`, if you must).
+
+We take no credit for the inspiration behind the meat of the guide. That goes to the team at [The New York Times](https://github.com/NYTimes/objective-c-style-guide).  We hope you agree with some of the modifcations we’ve made for our own purposes.
 
 ## Table of Contents
 
