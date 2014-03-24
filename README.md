@@ -338,7 +338,7 @@ NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
 
 ## Enumerated Types
 
-When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types â€” `NS_ENUM()`
+When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types: `NS_ENUM()`
 
 **Example:**
 
