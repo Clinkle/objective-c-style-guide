@@ -51,19 +51,18 @@ UIApplication.sharedApplication.delegate;
 
 ## Spacing and newlines
 
-We believe vertical whitespace is your friend. It majorly improves code readability.  Therefore:
+We believe vertical whitespace is your friend. It majorly improves code readability.  These are our rules for newlines and braces:
 
 * Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
-* All control flow braces (`if`/`else`/`switch`/`while`/`typedef` etc.) and method braces always open on a newline and close on another newline.
+* All **control flow**, **block** and **function** braces start on the same line and end on a newline.
+* All **method**, **class** and **structure** braces start on a newline and end on a newline.
+* Implied braces must always be made explicit
 
 **For example:**
 ```objc
-if (user.isHappy)
-{
+if (user.isHappy) {
     // Do something
-}
-else
-{
+} else {
     // Do something else
 }
 ```
@@ -77,8 +76,7 @@ Conditional bodies should always use braces even when a conditional body could b
 
 **For example:**
 ```objc
-if (!error)
-{
+if (!error) {
     return success;
 }
 ```
@@ -118,8 +116,7 @@ When methods return an error parameter by reference, switch on the returned valu
 **For example:**
 ```objc
 NSError *error;
-if (![self trySomethingWithError:&error])
-{
+if (![self trySomethingWithError:&error]) {
     // Handle Error
 }
 ```
@@ -128,8 +125,7 @@ if (![self trySomethingWithError:&error])
 ```objc
 NSError *error;
 [self trySomethingWithError:&error];
-if (error)
-{
+if (error) {
     // Handle Error
 }
 ```
@@ -265,8 +261,7 @@ All categories should be three-letter prefixed, and all methods and properties (
 - (instancetype)init
 {
     self = [super init]; // or call the designated initalizer
-    if (self)
-    {
+    if (self) {
         // Custom initialization
     }
 
@@ -429,18 +424,13 @@ For more complex boolean operators (combinations of `||` and `&&`), each individ
 **For example:**
 
 ```objc
-if (!someObject)
-{
+if (!someObject) {
     
-} 
-else if (usersTShirtIsFunny
+} else if (usersTShirtIsFunny
          || (userHasSeenBeardedWoman &&
-             beardedWomanDidWinBlueRibbon))
-{
+             beardedWomanDidWinBlueRibbon)) {
     
-} 
-else if (![userIsPlayingBadminton boolValue])
-{
+} else if (![userIsPlayingBadminton boolValue]) {
     
 }
 
@@ -449,16 +439,11 @@ else if (![userIsPlayingBadminton boolValue])
 **Not:**
 
 ```objc
-if (someObject == nil)
-{
+if (someObject == nil) {
 
-}
-else if (usersTShirtIsFunny == YES || (userHasSeenBeardedWoman && beardedWomanDidWinBlueRibbon)) // Never do this.
-{
+} else if (usersTShirtIsFunny == YES || (userHasSeenBeardedWoman && beardedWomanDidWinBlueRibbon)) { // Never do this.
     
-}
-else if ([userIsPlayingBadminton boolValue] == NO) // why u no use your brain?
-{
+} else if ([userIsPlayingBadminton boolValue] == NO) { // why u no use your brain?
     
 }
 ```
