@@ -9,7 +9,7 @@ We take no credit for the inspiration behind the meat of the guide. That goes to
 ## Table of Contents
 
 * [Dot-Notation Syntax](#dot-notation-syntax)
-* [Spacing](#spacing)
+* [Spacing and Newlines](#spacing-and-newlines)
 * [Control Flow](#control-flow)
   * [Ternary Operator](#ternary-operator)
   * [Error handling](#error-handling)
